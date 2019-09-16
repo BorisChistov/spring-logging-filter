@@ -1,0 +1,13 @@
+
+spring:
+    cloud:
+        gateway:
+            routes:
+                -   id: catalog
+                    uri: http://localhost:8080
+                    filters:
+                        - RewritePath=/wiremock/(?<segment>.*), /$\{segment}
+                    predicates:
+                        - Path=/wiremock/**
+server:
+    port: 9090
